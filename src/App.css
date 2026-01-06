@@ -1,0 +1,333 @@
+:root {
+  --bg-app: #0a0f1c;
+  --bg-panel: rgba(20, 30, 50, 0.7);
+  --text-primary: #ffffff;
+  --text-secondary: #b0c4de;
+  --accent-neon: #00ff9d;
+  --accent-cyan: #64ffda;
+  
+  --fuel-solar: #ffd700;       
+  --fuel-wind: #e0ffff;        
+  --fuel-hydro: #00bfff;       
+  --fuel-nuclear: #39ff14;     
+  --fuel-biomass: #228b22;     
+  --fuel-gas: #ff8c00;         
+  --fuel-coal: #696969;        
+  --fuel-other: #d000ff;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1a2e;
+  color: var(--text-primary);
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-app);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.container h1 {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  text-align: center;
+  padding: 0;
+}
+
+.charts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.chart-card {
+  flex: 1 1 300px;
+  min-width: 280px;
+  max-width: 400px;
+  
+  border: 1px solid var(--accent-neon);
+  box-shadow: 
+    0 0 15px rgba(0, 255, 157, 0.3), 
+    inset 0 0 20px rgba(0, 255, 157, 0.1); 
+  background: rgba(10, 20, 35, 0.95);
+  border-radius: 16px;
+  padding: 20px;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+  font-weight: 700;
+}
+
+.chart-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 15px;
+}
+
+.area-chart {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doughnut-container {
+  width: 100%;
+  max-width: 140px; 
+  aspect-ratio: 1;
+}
+
+.area-score {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: var(--accent-neon);
+  text-shadow: 0 0 8px var(--accent-neon);
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.score-value {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  white-space: nowrap;
+  display: flex;
+  align-items: center; 
+  justify-content: flex-end;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 15px var(--accent-neon);
+}
+
+.leaf-icon {
+  margin-left: 5px;
+  font-size: 1.5rem;
+}
+
+.area-legend {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.custom-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.custom-legend li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 2px;
+  background-color: var(--dot-color);
+  box-shadow: 0 0 5px var(--dot-color);
+}
+
+.optimizer-card {
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.optimizer-title {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 15px var(--accent-cyan);
+  margin-bottom: 30px;
+  font-family: 'Segoe UI';
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.optimizer-flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.optimizer-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.optimizer-controls label {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.optimizer-btn {
+  padding: 15px 20px;
+  background: var(--accent-neon);
+  border: none;
+  border-radius: 30px;
+  color: #000;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px var(--accent-neon);
+  width: 100%;
+}
+
+.optimizer-btn:hover {
+  transform: scale(1.02);
+  background: #fff;
+  box-shadow: 0 0 40px var(--accent-neon);
+}
+
+.result-container {
+  flex: 1;
+  border: 1px solid var(--accent-neon);
+  box-shadow: 0 0 15px rgba(0, 255, 157, 0.2), inset 0 0 20px rgba(0, 255, 157, 0.1);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 250px;
+  justify-content: center;
+}
+
+.car-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  mix-blend-mode: screen; 
+  filter: drop-shadow(0 0 10px var(--accent-cyan));
+  margin-bottom: 15px;
+}
+
+.window-stats h3 {
+  color: var(--accent-neon);
+  text-shadow: 0 0 12px var(--accent-neon);
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+  padding-bottom: 10px;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.stats-highlight {
+  margin-top: 15px;
+  background: rgba(0, 255, 157, 0.15);
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--accent-neon);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .optimizer-flex-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .optimizer-controls, 
+  .result-container {
+    width: 100%;
+  }
+  
+  .chart-card {
+    min-width: 100%;
+  }
+}
+
+input[type=range] {
+  width: 100%;
+  accent-color: var(--accent-neon);
+  cursor: pointer;
+  margin-top: 10px;
+  height: 6px;
+}
