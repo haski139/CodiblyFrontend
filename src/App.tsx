@@ -115,6 +115,7 @@ function App() {
   const [hours, setHours] = useState<number>(3);
   const [optimalWindow, setOptimalWindow] = useState<OptimalWindow | null>(null);
   const [energyData, setEnergyData] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const calculateOptimalWindow = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/optimal-charging?hours=${hours}`)
@@ -130,7 +131,8 @@ function App() {
         setEnergyData(response.data);
       })
       .catch(error => {
-        console.log("Błąd pobierania: ", error);
+        console.log("Error fetching data: ", error);
+        setError("Failed to fetch data. Please check if the backend is running.");
       })
   }, []);
 
@@ -138,8 +140,20 @@ function App() {
     calculateOptimalWindow();
   }, []);
 
+  if (error) {
+    return (
+      <div className="container" style={{textAlign: 'center', marginTop: '50px'}}>
+        <h2>Oops! Something went wrong 🔌</h2>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()} className="optimizer-btn" style={{maxWidth: '200px'}}>
+          TRY AGAIN
+        </button>
+      </div>
+    );
+  }
+  
   if (energyData.length === 0) {
-    return <div>Ładowanie danych... ⏳</div>;
+    return <div>Loading... ⏳</div>;
   }
 
   const formatDate = (isoString: string) => {
